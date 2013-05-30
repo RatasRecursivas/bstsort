@@ -10,9 +10,13 @@ Created on 29/05/2013
 import random as rand
 from time import time
 from bstsort import bstsort
+import sys
 
 # Inicializamos el random con seed 100
 rand.seed(100)
+
+# Ampliamos el limite de recursividad
+sys.setrecursionlimit(1000000000)
 
 if __name__ == '__main__':
     res = {} # Diccionario con los resultados en tiempo
