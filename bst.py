@@ -6,7 +6,7 @@ Created on 29/05/2013
 
 class BST(object):
     '''
-    Implementaci—n _lisiada_ de un bst
+    Implementaci?n _lisiada_ de un bst
     '''
 
 

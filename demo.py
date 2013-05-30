@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*- 
+
 '''
 Created on 29/05/2013
 
@@ -5,7 +8,8 @@ Created on 29/05/2013
 '''
 
 import random as rand
-from timeit import Timer
+from time import time
+from bstsort import bstsort
 
 # Inicializamos el random con seed 100
 rand.seed(100)
@@ -32,19 +36,22 @@ if __name__ == '__main__':
         elif resp == 'n':
             mostrar_l = False
         else:
-            print "Ingreso algo extra–o, intente de nuevo!"
+            print "Ingreso algo extranio, intente de nuevo!"
             continue
         break # Si el else no agarra el caso, quiere decir que ingreso 's' o 'n'
     
     for n in casos:
         l = [] # Lista vacia
-        setup = 'from bstsort import bstsort; for i in range(%d): l.append(%d)' % (n, rand.randint(0, 1000)) # Llenamos con numeros aleatorios
+        for i in range(n): l.append(rand.randint(0, 1000)) # Llenamos la lista con numeros aleatorios
         
-        if mostrar_l:
+        if mostrar_l: # Vemos si mostramos o no la lista
             print "l = %s" % l
-        stmt = 'bstsort(l)'
-        timer = Timer(stmt, setup) # Seteamos el timer para el statement donde se hace sort
-        res[n] = timer.timeit(1) # Medimos el tiempo y almacenamos el resultado
+        
+        t_inicio = time() # En sus marcas ... Listos ... Fuera
+        bstsort(l) # Pongele
+        t_fin = time() # Listo listo listo
+        tiempo_ejecucion = (t_fin - t_inicio) * 1000.0 # Calculamos el timer que tardo el sorting
+        res[n] = tiempo_ejecucion # Medimos el tiempo y almacenamos el resultado
     
     for n in sorted(res):
         print "bstsort: N = %d; T = %s" % (n, res[n])
