@@ -54,11 +54,11 @@ if __name__ == '__main__':
         t_inicio = time() # En sus marcas ... Listos ... Fuera
         bstsort(l) # Pongele
         t_fin = time() # Listo listo listo
-        if mostrar_l: # Vemos si mostramos o no la lista
-            print "l = %s" % l
         tiempo_ejecucion = (t_fin - t_inicio) * 1000.0 # Calculamos el timer que tardo el sorting (en ms)
         res[n] = tiempo_ejecucion # Medimos el tiempo y almacenamos el resultado
         
         print "bstsort: N = %d; T = %s ms" % (n, res[n])
-    
+        if mostrar_l: # Vemos si mostramos o no la lista
+            print "l = %s" % l
+        print
     # Aca faltaria el codigo para generar el grafico con matplotlib
