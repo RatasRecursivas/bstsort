@@ -18,10 +18,6 @@ rand.seed(100)
 # Ampliamos el limite de recursividad
 sys.setrecursionlimit(999999999)
 
-# Variables para controlar el rango de numeros aleatorios
-rand_i = 0
-rand_f = 100000000
-
 if __name__ == '__main__':
     res = {} # Diccionario con los resultados en tiempo
     
@@ -50,7 +46,7 @@ if __name__ == '__main__':
     
     for n in casos:
         l = [] # Lista vacia
-        for i in range(n): l.append(rand.randint(rand_i, rand_f)) # Llenamos la lista con numeros aleatorios
+        for i in range(n): l.append(rand.randint(0, n * 10)) # Llenamos la lista con numeros aleatorios
         
         if mostrar_l: # Vemos si mostramos o no la lista
             print "l = %s" % l
