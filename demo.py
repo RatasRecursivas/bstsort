@@ -16,7 +16,7 @@ import sys
 rand.seed(100)
 
 # Ampliamos el limite de recursividad
-sys.setrecursionlimit(1000000000)
+sys.setrecursionlimit(999999999)
 
 if __name__ == '__main__':
     res = {} # Diccionario con los resultados en tiempo
