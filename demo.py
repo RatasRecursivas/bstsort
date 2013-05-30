@@ -52,8 +52,7 @@ if __name__ == '__main__':
         t_fin = time() # Listo listo listo
         tiempo_ejecucion = (t_fin - t_inicio) * 1000.0 # Calculamos el timer que tardo el sorting (en ms)
         res[n] = tiempo_ejecucion # Medimos el tiempo y almacenamos el resultado
-    
-    for n in sorted(res):
+        
         print "bstsort: N = %d; T = %s ms" % (n, res[n])
     
     # Aca faltaria el codigo para generar el grafico con matplotlib
