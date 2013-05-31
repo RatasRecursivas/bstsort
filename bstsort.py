@@ -7,7 +7,10 @@ Created on 29/05/2013
 from bst import BST
 
 def bstsort(l):
-    arbol = BST(l)
+    arbol = BST()
     
-    for (idx, item) in enumerate(arbol.inorder()):
-        l[idx] = item
+    while len(l) > 0:
+        item = l.pop()
+        arbol.add(item)
+    
+    l.extend(arbol.inorder())
