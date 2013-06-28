@@ -14,7 +14,7 @@ class BST(object):
         '''
         Constructor
         '''
-        self.raiz = {}  #NULL
+        self.__l = {} # Lista interna
         
         # Si pasa un iterable, llenamos el arbol con el
         if iterable is not None:
@@ -22,49 +22,45 @@ class BST(object):
                 self.add(item)
             
     
-    def add(self, dato, nodo=None):
+    def add(self, dato, nodo_idx=None):
         '''
         '''
+        if nodo_idx is None:
+            nodo_idx = 0 # Primer nodo
+        l = self.__l
+        nodo = l.get(nodo_idx, None)
+        
         if nodo is None:
-            nodo = self.raiz
-        
-        if nodo == {}:
-            nodo['izq'] = {}
-            nodo['der'] = {}
-            nodo['key'] = dato
+            l[nodo_idx] = dato
         else:
-            if dato < nodo['key']:
-                self.add(dato, nodo['izq'])
+            if dato < nodo:
+                nodo_idx = (2 * nodo_idx) + 1
             else:
-                self.add(dato, nodo['der'])
+                nodo_idx = (2 * nodo_idx) + 2
+            self.add(dato, nodo_idx)
     
-    def inorder(self, nodo = None, elementos = None):
+    def inorder(self, nodo_idx = None, elementos = None):
         '''
         '''
         
-        if nodo is None: # Primera ejecucion
+        if nodo_idx is None: # Primera ejecucion
             elementos = []
-            nodo = self.raiz
+            nodo_idx = 0
         
-        if nodo['izq'] != {}:
-            self.inorder(nodo['izq'], elementos)
+        l = self.__l
+        nodo = l.get(nodo_idx, None)
+        hijo_izq = (2 * nodo_idx) + 1
+        hijo_der = (2 * nodo_idx) + 2
         
-        elementos.append(nodo['key'])
+        if l.get(hijo_izq, None) is not None:
+            self.inorder(hijo_izq, elementos)
         
-        if nodo['der'] != {}:
-            self.inorder(nodo['der'], elementos)
+        elementos.append(nodo)
+        
+        if l.get(hijo_der, None) is not None:
+            self.inorder(hijo_der, elementos)
         
         return elementos
-            
-    def mostrar(self, nodo=None):
-        if nodo is None:
-            nodo = self.raiz
-
-        if nodo != {}:
-            self.mostrar(nodo['izq'])
-            print nodo['key']
-            #print "Dato:", nodo['key'], "Factor equilibrio", nodo['factor_equilibrio']
-            self.mostrar(nodo['der'])
     
     def plot(self):
         '''
