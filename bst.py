@@ -14,7 +14,7 @@ class BST(object):
         '''
         Constructor
         '''
-        self.__l = [None] * 200000000 # Lista interna
+        self.__l = {} # Lista interna
         
         # Si pasa un iterable, llenamos el arbol con el
         if iterable is not None:
@@ -28,7 +28,7 @@ class BST(object):
         if nodo_idx is None:
             nodo_idx = 0 # Primer nodo
         l = self.__l
-        nodo = l[nodo_idx]
+        nodo = l.get(nodo_idx, None)
         
         if nodo is None:
             l[nodo_idx] = dato
@@ -48,29 +48,19 @@ class BST(object):
             nodo_idx = 0
         
         l = self.__l
-        nodo = l[nodo_idx]
+        nodo = l.get(nodo_idx, None)
         hijo_izq = (2 * nodo_idx) + 1
         hijo_der = (2 * nodo_idx) + 2
         
-        if l[hijo_izq] is not None:
+        if l.get(hijo_izq, None) is not None:
             self.inorder(hijo_izq, elementos)
         
         elementos.append(nodo)
         
-        if l[hijo_der] is not None:
+        if l.get(hijo_der, None) is not None:
             self.inorder(hijo_der, elementos)
         
         return elementos
-            
-    def mostrar(self, nodo=None):
-        if nodo is None:
-            nodo = self.raiz
-
-        if nodo != {}:
-            self.mostrar(nodo['izq'])
-            print nodo['key']
-            #print "Dato:", nodo['key'], "Factor equilibrio", nodo['factor_equilibrio']
-            self.mostrar(nodo['der'])
     
     def plot(self):
         '''
