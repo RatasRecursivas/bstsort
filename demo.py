@@ -5,6 +5,8 @@
 Created on 29/05/2013
 
 @author: pperez
+
+Codigo de plot robado flaitemente de https://github.com/cseager/timeit_plot
 '''
 
 import random
