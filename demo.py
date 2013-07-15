@@ -8,15 +8,74 @@ Created on 29/05/2013
 '''
 
 import random
-from time import time
-from bstsort import bstsort
 import sys
+from collections import defaultdict
+import matplotlib.pyplot as plt
+import numpy as np
+import timeit
 
 # Inicializamos el random con seed 100
 rand = random.Random(100)
 
 # Ampliamos el limite de recursividad
 sys.setrecursionlimit(999999999)
+
+# Cantidad de repeticiones por cada n
+reps = 2
+
+def timer(stmt, setup = 'pass'):
+    return timeit.Timer(stmt, setup=setup)
+
+def substitute_titles(label, series):
+    ordered_axes=["x", "y", "z"]
+    try: 
+        for i, v in enumerate(series): 
+            label = label.replace("{"+str(v)+"}", ordered_axes[i])
+    except: 
+        label = label.replace("{"+str(series)+"}", ordered_axes[0])
+    return label
+
+def timeit_plot2D(data, xlabel='xlabel', title='title', **kwargs):
+    """Plots the results from a defaultdict returned by timeit_compare.
+    
+    Each function will be plotted as a different series. 
+    
+    timeit_compare may test many conditions, and the order of the conditions
+    in the results data can be understood from the string substitutions 
+    noted in the keys of the defaultdict. By default series=0 means
+    that the first series is plotted, but this can be changed to plot 
+    any of the testing conditions available. 
+    """
+    series = kwargs.get('series', 0)
+    style = kwargs.get('style', 'line')
+    size = kwargs.get('size', 500)
+    ylabel = kwargs.get('ylabel', 'time')
+    cmap = kwargs.get('cmap', 'rainbow')
+    lloc = kwargs.get('lloc', 2)
+    dataT = {}
+    # set color scheme
+    c = iter(plt.get_cmap(cmap)(np.linspace(0, 1, len(data))))
+    # transpose the data from [x, y, z]... into ([x...], [y...], [z...])
+    for k, v in data.items():
+        dataT[k] = zip(*v)
+    fig, ax = plt.subplots()
+    for k, v in dataT.items():
+        if style == 'scatter':
+            ax.scatter(v[series], v[-1], s=size, c=next(c), alpha=.75)
+        elif style == 'bubble':
+            x, y, z = v[series[0]], v[series[1]], v[-1]
+            ax.scatter(x, y, s=[size*i for i in z], c=next(c), alpha=.5)
+        else:
+            # pdb.set_trace()
+            ax.plot(v[series], v[-1], c=next(c), lw=2)
+    # TODO: BUG: no way to set other parameters manually (README fig2)
+    ax.legend([substitute_titles(k,series) for k in dataT.keys()], loc=lloc)
+    ax.set_xlabel(xlabel)
+    ax.set_ylabel(ylabel)
+    ax.set_title(title)
+    ax.grid(True)
+    return fig
+
 
 # Genera una lista aleatoria, el rango es 10 veces mayor a n para dispersar los datos
 def muestra(n):
@@ -26,7 +85,7 @@ def muestra(n):
     return l
 
 if __name__ == '__main__':
-    res = {} # Diccionario con los resultados en tiempo
+    res = defaultdict(list) # Diccionario con los resultados en tiempo, despues lo pasamos a la funcion que hace el grafico
     
     while True:
         print "Ingrese los N a probar, separados por espacio"
@@ -52,18 +111,20 @@ if __name__ == '__main__':
         break # Si el else no agarra el caso, quiere decir que ingreso 's' o 'n', avanzamos en el programa
     
     for n in casos:
+        setup = 'from bstsort import bstsort; from __main__ import l' # Importamos la funcion
         l = muestra(n) # Generamos la lista aleatoria de numeros
+        stmt = 'bstsort(l)'
         if mostrar_l: # Vemos si mostramos o no la lista
             print "l = %s" % l
         
-        t_inicio = time() # En sus marcas ... Listos ... Fuera
-        bstsort(l) # Pongele
-        t_fin = time() # Listo listo listo
-        tiempo_ejecucion = (t_fin - t_inicio) * 1000.0 # Calculamos el timer que tardo el sorting (en ms)
-        res[n] = tiempo_ejecucion # Medimos el tiempo y almacenamos el resultado
+        test = timer(stmt, setup)
+        result = test.timeit(number = reps)
+        res[stmt].append([n, result])
         
-        print "bstsort: N = %d; T = %s ms" % (n, res[n])
+        print "bstsort: N = %d; T = %s ms" % (n, result)
         if mostrar_l: # Vemos si mostramos o no la lista
             print "l = %s" % l
         print
-    # Aca faltaria el codigo para generar el grafico con matplotlib
+    
+    timeit_plot2D(res, 'n', 'BSTSort')
+    plt.savefig('resultado.png')
