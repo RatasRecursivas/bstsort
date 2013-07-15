@@ -9,7 +9,7 @@ from bst import BST
 def bstsort(l):
     arbol = BST()
     
-    while len(l) > 0:
+    while l:
         item = l.pop()
         arbol.add(item)
     

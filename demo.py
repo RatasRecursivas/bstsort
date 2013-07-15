@@ -7,16 +7,23 @@ Created on 29/05/2013
 @author: pperez
 '''
 
-import random as rand
+import random
 from time import time
 from bstsort import bstsort
 import sys
 
 # Inicializamos el random con seed 100
-rand.seed(100)
+rand = random.Random(100)
 
 # Ampliamos el limite de recursividad
 sys.setrecursionlimit(999999999)
+
+# Genera una lista aleatoria, el rango es 10 veces mayor a n para dispersar los datos
+def muestra(n):
+    l = []
+    lim = 5 * n
+    l = [rand.randint(-lim, lim) for _ in range(n)]
+    return l
 
 if __name__ == '__main__':
     res = {} # Diccionario con los resultados en tiempo
@@ -42,12 +49,10 @@ if __name__ == '__main__':
         else:
             print "Ingreso algo extranio, intente de nuevo!"
             continue
-        break # Si el else no agarra el caso, quiere decir que ingreso 's' o 'n'
+        break # Si el else no agarra el caso, quiere decir que ingreso 's' o 'n', avanzamos en el programa
     
     for n in casos:
-        l = [] # Lista vacia
-        for i in range(n): l.append(rand.randint(0, n * 10)) # Llenamos la lista con numeros aleatorios
-        
+        l = muestra(n) # Generamos la lista aleatoria de numeros
         if mostrar_l: # Vemos si mostramos o no la lista
             print "l = %s" % l
         
