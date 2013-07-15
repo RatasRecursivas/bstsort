@@ -23,7 +23,7 @@ rand = random.Random(100)
 sys.setrecursionlimit(999999999)
 
 # Cantidad de repeticiones por cada n
-reps = 2
+reps = 1
 
 def timer(stmt, setup = 'pass'):
     return timeit.Timer(stmt, setup=setup)
@@ -129,4 +129,5 @@ if __name__ == '__main__':
         print
     
     timeit_plot2D(res, 'n', 'BSTSort')
-    plt.savefig('resultado.png')
+    # plt.savefig('resultado.png')
+    plt.show()
