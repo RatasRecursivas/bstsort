@@ -78,10 +78,12 @@
 
 \usepackage{graphicx} % Allows including images
 \usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{hyperref}
 
 \usepackage[utf8]{inputenc}
 \usepackage[spanish]{babel}
 \usepackage{listings}
+
 
 
 %----------------------------------------------------------------------------------------
@@ -95,19 +97,21 @@
 {
 Universidad Tecnológica Metropolitana \\ % Your institution for the title page
 \medskip
-\textit{https://github.com/RatasRecursivas} % Your email address
+\url{https://github.com/RatasRecursivas} % Your site
 }
 \date{\today} % Date, can be changed to a custom date
 
 \begin{document}
 
+\setbeamercovered{transparent}
+
 \begin{frame}
-\titlepage % Print the title page as the first slide
+	\titlepage % Print the title page as the first slide
 \end{frame}
 
 \begin{frame}
-\frametitle{Indice} % Table of contents slide, comment this block out to remove it
-\tableofcontents % Throughout your presentation, if you choose to use \section{} and \subsection{} commands, these will automatically be printed on this slide as an overview of your presentation
+	\frametitle{Indice} % Table of contents slide, comment this block out to remove it
+	\tableofcontents % Throughout your presentation, if you choose to use \section{} and \subsection{} commands, these will automatically be printed on this slide as an overview of your presentation
 \end{frame}
 
 %----------------------------------------------------------------------------------------
@@ -118,108 +122,137 @@ Universidad Tecnológica Metropolitana \\ % Your institution for the title page
 \section{BST} % Sections can be created in order to organize your presentation into discrete blocks, all sections and subsections are automatically printed in the table of contents as an overview of the talk
 %------------------------------------------------
 
-\subsection{¿Que es?} % A subsection can be created just before a set of slides with a common theme to further break down your presentation into chunks
+	\subsection{¿Que es?} % A subsection can be created just before a set of slides with a common theme to further break down your presentation into chunks
 
-\begin{frame}
-\frametitle{¿Que es?}
-Introducimos a nuestro querido amigo el BST (\textbf{B}inary \textbf{S}earch \textbf{T}ree):\\
-\textbf{Preambulo}: Descripción de un nodo: Consiste en un registro de información, generalmente consta de dos o tres partes:
-\begin{itemize}
-	\item Una llave, en base a esta ordenaremos.
-	\item La información como tal.
-	\item Vínculos a otros nodos.
-\end{itemize}
-\end{frame}
+		\begin{frame}
+			\frametitle{¿Que es?}
+				Introducimos a nuestro querido amigo el BST (\textbf{B}inary \textbf{S}earch \textbf{T}ree):\\
+			\textbf{Preambulo}: ¿Que es un nodo?: Consiste en un registro de información, generalmente consta de dos o tres partes:
+			\begin{itemize}[<+->]
+				\item Una llave, en base a esta ordenaremos.
+				\item La información como tal.
+				\item Vínculos a otros nodos.
+			\end{itemize}
+		\end{frame}
 
-\begin{frame}
-Un BST es una estructura de datos abstracta basada en nodos que posee las siguientes características/reglas:
-\begin{itemize}
-	\item El subarbol izquierdo de un nodo \textbf{solo} contiene nodos cuyas llaves son \textbf{menores} a la llave de aquel nodo.
-	\item El subarbol derecho de un nodo \textbf{solo} contiene nodos cuyas llaves son \textbf{mayores} a la llave de aquel nodo.
-	\item Ambos subarboles también son BSTs.
-	\item No hay llaves duplicadas.
-\end{itemize}
-\end{frame}
+		\begin{frame}
+			Un BST es una estructura de datos abstracta basada en nodos que posee las siguientes características/reglas:
+			\begin{itemize}[<+->]
+				\item El subarbol izquierdo de un nodo \textbf{solo} contiene nodos cuyas llaves son \textbf{menores} a la llave de aquel nodo.
+				\item El subarbol derecho de un nodo \textbf{solo} contiene nodos cuyas llaves son \textbf{mayores} a la llave de aquel nodo.
+				\item Ambos subarboles también son BSTs.
+				\item No hay llaves duplicadas.
+			\end{itemize}
+		\end{frame}
 
-\begin{frame}
-	\frametitle{Imagen del arbolito}
-	\begin{figure}
-  		\centering
-    		\includegraphics[scale=0.5]{rbtree.png}
-  		\caption{Red-Black Tree}
-  		\label{fig:ejemplo}
-	\end{figure}
-	\begin{center}
-	\textbf{¿Cuantos BST ven en la imagen?}
-	\end{center}
-\end{frame}
+		\begin{frame}
+			\frametitle{Con ustedes el arbolito}
+			\begin{figure}
+  				\centering
+    			\includegraphics[scale=0.5]{rbtree.png}
+  				\caption{Red-Black Tree}
+  				\label{fig:ejemplo}
+			\end{figure}
+			
+			\begin{center}
+				\textbf{¿Cuantos BST ven en la imagen?}
+			\end{center}
+		\end{frame}
 
-
-
-\subsection{Operaciones basicas}
-
+	\subsection{Operaciones basicas}
 
 %------------------------------------------------
 
-\begin{frame}
-\frametitle{Operaciones basicas}
-Las principales operaciones de un BST son:
-\begin{itemize}
-\item \textbf{Inserción}
-\item \textbf{Borrado}: No es necesaria para el sorting.
-\item \textbf{Búsqueda}: No es necesaria para el sorting.
-\item \textbf{Recorridos}:
-	\begin{itemize}
-		\item EnOrden
-		\item PostOrden
-		\item PreOrden
-	\end{itemize}
-\end{itemize}
-\end{frame}
+		\begin{frame}
+			\frametitle{Operaciones basicas}
+			Las principales operaciones de un BST son:
+			\begin{itemize}[<+->]
+				\item \textbf{Inserción}
+				\item \textbf{Borrado}: No es necesaria para el sorting.
+				\item \textbf{Búsqueda}: No es necesaria para el sorting.
+				\item \textbf{Recorridos}:
+					\begin{itemize}[<+->]
+						\item EnOrden
+						\item PostOrden
+						\item PreOrden
+					\end{itemize}
+			\end{itemize}
+		\end{frame}
 
-\begin{frame}
-\frametitle{El peor caso de inserción}
-	\begin{figure}
-  		\centering
-    		\includegraphics[scale=0.3]{lls.jpg}
-  		\caption{Worst case evah!}
-  		\label{fig:lls}
-	\end{figure}
-	\begin{center}
-		\textbf{Para insertar -1 tendriamos que pasar por cada nodo!}
-	\end{center}
-\end{frame}
+		\begin{frame}
+			\frametitle{El peor caso de inserción}
+			\begin{figure}
+  				\centering
+    			\includegraphics[scale=0.3]{lls.jpg}
+  				\caption{Worst case evah!}
+  				\label{fig:lls}
+			\end{figure}
+		
+			\begin{center}
+				\textbf{Para insertar -1 tendriamos que pasar por cada nodo!}
+			\end{center}
+		\end{frame}
 
+		\begin{frame}
+			\frametitle{Ejemplo de recorrido EnOrden}
+			\begin{figure}
+  				\centering
+    			\includegraphics[scale=0.5]{inorden.png}
+  				\caption{In-Orden}
+  				\label{fig:inorden}
+			\end{figure}
+		
+			\begin{center}
+				El recorrido sería: [3-5-10-12-23-28]
+			\end{center}
+		\end{frame}
 %------------------------------------------------
 \section{BST Sort}
 %------------------------------------------------
 
-\subsection{Uso del BST en el algoritmo}
-\begin{frame}
-\frametitle{Entonces ... ¿Que tiene que ver el bst con el ordenamiento?}
-Nos aprovechamos de la inserción y el recorrido EnOrden del arbol.
-\newline
+	\subsection{Uso del BST en el algoritmo}
 
-Al insertar en el arbol, los elementos son ordenados segun las reglas de este y al recorrerlo EnOrden son presentados de forma ordenada.
-\end{frame}
+		\begin{frame}
+			\frametitle{Entonces ... ¿Que tiene que ver el bst con el ordenamiento?}
+			Nos aprovechamos de la inserción y el recorrido EnOrden del arbol.
+			\newline
+
+			Al insertar en el arbol, los elementos son ordenados segun las reglas de este y al recorrerlo EnOrden son presentados de forma ordenada.
+		\end{frame}
 
 %------------------------------------------------
 
-\subsection{El algoritmo en si}
+	\subsection{Complejidad y relación con la altura del árbol}
 
-\begin{frame}
-\frametitle{Codigo}
-	\lstinputlisting[language=Python, firstline=7, scale=0.5]{../bstsort.py}
-\end{frame}
+		\begin{frame}
+			\frametitle{Complejidad y relación con la altura del árbol}
+			En base al árbol podemos postular que su altura esta expresada en la siguiente formula:
+				\begin{equation}
+					n < = 2^{(h + 1)} - 1
+				\end{equation}
+				Obteniendo que:
+				\begin{equation}
+					h >= \log_2{(n)}
+				\end{equation}
+				
+			Esta es la característica principal de un árbol, la que permite que las operaciones sean tan rápidas, el único inconveniente es asegurar este mínimo valor para la altura ...
+		\end{frame}
+
+		\subsection{El algoritmo en si}
+
+			\begin{frame}
+				\frametitle{Codigo}
+				\lstinputlisting[language=Python, firstline=7, scale=0.5]{../bstsort.py}
+			\end{frame}
 
 \section{Conclusiones}
 
-\begin{frame}
-\frametitle{Conclusiones}
-	\begin{itemize}
-	\item Se puede mejorar usando arboles autobalanceables.
-	\item No se nota la tendencia logaritmica de las inserciones debido a la complejidad lineal del recorrido.
-	\end{itemize}
-\end{frame}
+	\begin{frame}
+		\frametitle{Conclusiones}
+			\begin{itemize}[<+->]
+				\item Se puede mejorar usando arboles autobalanceables, aunque estar asegurando minuciosamente puede añadir un costo considerable.
+				\item No se nota la tendencia logaritmica de las inserciones debido a la complejidad lineal del recorrido.
+			\end{itemize}
+	\end{frame}
 
 \end{document} 
