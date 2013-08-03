@@ -138,10 +138,10 @@ Universidad Tecnológica Metropolitana \\ % Your institution for the title page
 		\begin{frame}
 			Un BST es una estructura de datos abstracta basada en nodos que posee las siguientes características/reglas:
 			\begin{itemize}[<+->]
-				\item El subarbol izquierdo de un nodo \textbf{solo} contiene nodos cuyas llaves son \textbf{menores} a la llave de aquel nodo.
-				\item El subarbol derecho de un nodo \textbf{solo} contiene nodos cuyas llaves son \textbf{mayores} a la llave de aquel nodo.
-				\item Ambos subarboles también son BSTs.
-				\item No hay llaves duplicadas.
+				\item El subarbol izquierdo \textbf{solo} contiene nodos cuyas llaves son \textbf{menores} a la llave de su raiz.
+				\item El subarbol derecho \textbf{solo} contiene nodos cuyas llaves son \textbf{mayores} a la llave de su raiz.
+				\item Cada subarbol también es un BST.
+				\item No hay llaves duplicadas *.
 			\end{itemize}
 		\end{frame}
 
@@ -155,7 +155,8 @@ Universidad Tecnológica Metropolitana \\ % Your institution for the title page
 			\end{figure}
 			
 			\begin{center}
-				\textbf{¿Cuantos BST ven en la imagen?}
+				\textbf{¿Cuantos BST ven en la imagen?}\\
+				\textit{Nota: Pregunta retórica, pero definitivamente hay mas que uno :-)}
 			\end{center}
 		\end{frame}
 
@@ -236,6 +237,18 @@ Universidad Tecnológica Metropolitana \\ % Your institution for the title page
 				\end{equation}
 				
 			Esta es la característica principal de un árbol, la que permite que las operaciones sean tan rápidas, el único inconveniente es asegurar este mínimo valor para la altura ...
+		\end{frame}
+		
+		\begin{frame}
+			\frametitle{Complejidad y relación con la altura del árbol}
+			Si sumamos las operaciones de inserción y recorrido tendriamos lo siguiente para el mejor caso:
+			\begin{equation}
+				O(n) = n  \log_2{(n)} + n
+			\end{equation}
+			O esto para el peor caso:
+			\begin{equation}
+				O(n) = n^2 + n
+			\end{equation}
 		\end{frame}
 
 		\subsection{El algoritmo en si}

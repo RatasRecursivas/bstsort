@@ -5,8 +5,9 @@
 Created on 29/05/2013
 
 @author: pperez
+@author: srocha
 
-Codigo de plot robado flaitemente de https://github.com/cseager/timeit_plot
+Codigo de plot tomado flaitemente de https://github.com/cseager/timeit_plot larga vida al software libre :)
 '''
 
 import random
@@ -81,14 +82,12 @@ def timeit_plot2D(data, xlabel='xlabel', title='title', **kwargs):
 
 # Genera una lista aleatoria, el rango es 10 veces mayor a n para dispersar los datos
 def muestra(n):
-    l = []
-    lim = 5 * n
-    l = [rand.randint(-lim, lim) for _ in range(n)]
-    return l
+    return [rand.randint(0, 10 * n) for _ in range(n)]
 
 if __name__ == '__main__':
     res = defaultdict(list) # Diccionario con los resultados en tiempo, despues lo pasamos a la funcion que hace el grafico
-    
+    count = 0
+
     while True:
         print "Ingrese los N a probar, separados por espacio"
         casos = raw_input()
@@ -112,6 +111,7 @@ if __name__ == '__main__':
             continue
         break # Si el else no agarra el caso, quiere decir que ingreso 's' o 'n', avanzamos en el programa
     
+
     for n in casos:
         setup = 'from bstsort import bstsort; from __main__ import l' # Importamos la funcion
         l = muestra(n) # Generamos la lista aleatoria de numeros
@@ -121,13 +121,16 @@ if __name__ == '__main__':
         
         test = timer(stmt, setup)
         result = test.timeit(number = reps)
+        count += result
         res[stmt].append([n, result])
         
-        print "bstsort: N = %d; T = %s ms" % (n, result)
+        print "bstsort: N = %d; T = %s s" % (n, result)
         if mostrar_l: # Vemos si mostramos o no la lista
             print "l = %s" % l
         print
-    
+    print "Y solo perdimos {0:.2f} segundos de nuestras vidas ;-)".format(count)
+    raw_input("Presione una tecla para continuar")
+
     timeit_plot2D(res, 'n', 'BSTSort')
     # plt.savefig('resultado.png')
     plt.show()
